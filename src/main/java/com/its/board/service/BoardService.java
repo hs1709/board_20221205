@@ -6,6 +6,7 @@ import com.its.board.repository.BoardRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -18,10 +19,14 @@ public class BoardService {
 
     }
 
+
     public List<BoardDTO> findAll() {
+        List<BoardEntity> boardEntityList = boardRepository.findAll();
+        List<BoardDTO> boardDTOList = new ArrayList<>();
+        for (BoardEntity boardEntity: boardEntityList){
+            BoardDTO boardDTO = BoardDTO.toDTO(boardEntity);
+            boardDTOList.add(boardDTO);
+        }
+        return boardDTOList;
     }
-
-
-//    public List<BoardDTO> findAll() {
-//    }
 }
